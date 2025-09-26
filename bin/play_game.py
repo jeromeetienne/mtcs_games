@@ -17,6 +17,9 @@ from src.players.player_random import PlayerRandom
 from src.protocols.player_protocol import PlayerProtocol
 from src.protocols.game_protocol import GameProtocol
 
+###############################################################################
+#   Game Loop
+#
 def play_game(game: GameProtocol, player1: PlayerProtocol, player2: PlayerProtocol) -> None:
     """
     Plays a game of Tic-Tac-Toe between a HumanPlayer and a RandomPlayer.
@@ -36,12 +39,15 @@ def play_game(game: GameProtocol, player1: PlayerProtocol, player2: PlayerProtoc
     print("-" * 30)
     
     while not game.is_game_over():
-        current_player_obj = players[game.current_player]
+        current_player = players[game.current_player]
         
         print(f"\n✨ Current Board:\n{game}")
         
         # Get the move from the current player object
-        move = current_player_obj.get_move(game)
+        move = current_player.get_move(game)
+
+        # Log the move
+        print(f"Player {current_player.marker} ({type(current_player).__name__}) picked move: {move}")
         
         # Make the move and update the game state
         game = game.make_move(move)
@@ -58,7 +64,10 @@ def play_game(game: GameProtocol, player1: PlayerProtocol, player2: PlayerProtoc
     else: # result == 0
         print("🤝 **It's a Draw!** 🤝")
 
-# --- Example of How to Play ---
+
+###############################################################################
+#   Main function to parse arguments and start the game
+#
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Play a game of Tic-Tac-Toe, Connect4, or Othello against an AI.",
