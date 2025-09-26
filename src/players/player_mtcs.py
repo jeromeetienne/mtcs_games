@@ -24,6 +24,12 @@ class MCTSNode:
         """Checks if all legal moves from this state have corresponding child nodes."""
         return len(self.children) == len(self.game_state.get_legal_moves())
 
+    def unexpanded_moves(self) -> List[int]:
+        """Returns a list of legal moves that do not yet have a child node."""
+        all_moves = set(self.game_state.get_legal_moves())
+        expanded_moves = set(self.children.keys())
+        return list(all_moves - expanded_moves)
+
     def best_uct_child(self, c_param: float = 1.4) -> Tuple[int, 'MCTSNode']:
         """
         Selects the child node with the highest UCT1 (Upper Confidence Bound 1 applied to trees) value.
@@ -56,12 +62,6 @@ class MCTSNode:
              raise Exception("No children found for UCT selection, this should not happen in a non-terminal node.")
 
         return best_move_node
-
-    def unexpanded_moves(self) -> List[int]:
-        """Returns a list of legal moves that do not yet have a child node."""
-        all_moves = set(self.game_state.get_legal_moves())
-        expanded_moves = set(self.children.keys())
-        return list(all_moves - expanded_moves)
     
 ###############################################################################
 #   MCTS Player Implementation
