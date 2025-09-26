@@ -9,3 +9,10 @@
 - Do a better UI
   - color in the output
   - make it possible to select the legal moves by arrow keys
+- make it possible to play MTCS vs MTCS
+  - add a --second argument to play_game.py
+- add a way to set the number of simulations for MTCS
+  - add a --simulations argument to play_game.py
+- add a way to set the exploration parameter for MTCS
+  - add a --exploration argument to play_game.py
+- make it possible to pick the random player too
