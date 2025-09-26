@@ -1,14 +1,11 @@
 # TODO
-- in game_protocol, add a .copy() method to clone a game state
-- make the move an actual type
-  - currently it's just an int
-- try to make it play chess too
-  - how would that work with MTCS ?
-- how to get the move representation for chess ?
-  - e.g. uci
 - Do a better UI
   - color in the output
   - make it possible to select the legal moves by arrow keys
+- in game_protocol, add a .copy() method to clone a game state
+  - PRO it will be clearer
+- add checkers game ?
+- do gif of games played
 - make it possible to play MTCS vs MTCS
   - add a --second argument to play_game.py
 - add a way to set the number of simulations for MTCS
@@ -20,3 +17,9 @@
   - currently the tree is discarded after each move
   - this would require to keep track of the root node and its children
   - and to update the root node after each move
+- make the move an actual `Move` type, and a `Square` type for chess
+  - currently it's just an int
+- try to make it play chess too
+  - how would that work with MTCS ?
+- how to get the move representation for chess ?
+  - e.g. uci

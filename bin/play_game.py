@@ -7,7 +7,7 @@ and an AI player (Random or MCTS).
 # pip imports
 import argparse
 
-# local imports
+
 from src.games.game_tictactoe import GameTicTacToe
 from src.games.game_connect4 import GameConnect4
 from src.games.game_othello import GameOthello
