@@ -13,24 +13,16 @@ from src.games.game_connect4 import GameConnect4
 from src.games.game_othello import GameOthello
 from src.players.player_human import PlayerHuman
 from src.players.player_mtcs import PlayerMCTS
+from src.players.player_random import PlayerRandom
 from src.protocols.player_protocol import PlayerProtocol
 from src.protocols.game_protocol import GameProtocol
 
-def play_game(game: GameProtocol, human_starts: bool = True) -> None:
+def play_game(game: GameProtocol, player1: PlayerProtocol, player2: PlayerProtocol) -> None:
     """
     Plays a game of Tic-Tac-Toe between a HumanPlayer and a RandomPlayer.
 
     :param human_starts: If True, HumanPlayer is 'X' (1); otherwise, RandomPlayer is 'X'.
     """
-
-    if human_starts:
-        player1 = PlayerHuman(1) # X
-        # player2 = RandomPlayer(-1) # O
-        player2 = PlayerMCTS(-1) # O
-    else:
-        # player1 = RandomPlayer(1) # X
-        player1 = PlayerMCTS(1) # X
-        player2 = PlayerHuman(-1) # O
 
     players: dict[int, PlayerProtocol] = {1: player1, -1: player2}
 
@@ -73,7 +65,8 @@ if __name__ == "__main__":
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
     parser.add_argument('--game', '-g', choices=['tictactoe', 'connect4', 'othello'], default='tictactoe', help="Choose the game to play.")
-    parser.add_argument('--first', '-f', choices=['human', 'ai'], default='human', help="Choose who plays first.")
+    parser.add_argument('--first', '-f', choices=['human', 'ai', 'random'], default='human', help="Choose who plays first.")
+    parser.add_argument('--second', '-s', choices=['human', 'ai', 'random'], default='ai', help="Choose who plays second.")
     args = parser.parse_args()
 
     if args.game == 'tictactoe':
@@ -85,7 +78,26 @@ if __name__ == "__main__":
     else:
         assert False, "Invalid game choice."
 
+    # init player1
     if args.first == 'human':
-        play_game(game,human_starts=True)
+        player1 = PlayerHuman(1)
+    elif args.first == 'ai':
+        player1 = PlayerMCTS(1)
+    elif args.first == 'random':
+        player1 = PlayerRandom(1)
     else:
-        play_game(game,human_starts=False)
+        assert False, "Invalid first player choice."
+
+    # init player2
+    if args.second == 'human':
+        player2 = PlayerHuman(-1)
+    elif args.second == 'ai':
+        player2 = PlayerMCTS(-1)
+    elif args.second == 'random':
+        player2 = PlayerRandom(-1)
+    else:
+        assert False, "Invalid second player choice."
+    
+
+    # start the game
+    play_game(game, player1, player2)
