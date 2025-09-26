@@ -15,6 +15,10 @@ class GameProtocol(Protocol):
         """Returns the current game state as a list."""
         ...
 
+    def copy(self) -> "GameProtocol":
+        """Returns a deep copy of the game."""
+        ...
+
     def make_move(self, move: int) -> "GameProtocol":
         """Returns a new GameProtocol object after making the move."""
         ...

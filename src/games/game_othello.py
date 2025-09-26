@@ -63,6 +63,13 @@ class GameOthello(GameProtocol):
         """Returns the current game state as a list."""
         return list(self.board)
     
+    def copy(self) -> "GameOthello":
+        """Returns a deep copy of the game."""
+        new_game = GameOthello(self.size)
+        new_game.board = list(self.board)
+        new_game.current_player = self.current_player
+        return new_game
+    
     def make_move(self, move: int) -> "GameOthello":
         """
         Creates and returns a new GameOthello object after making the move.
@@ -75,8 +82,7 @@ class GameOthello(GameProtocol):
                       (0, -1),          (0, 1),
                       (1, -1), (1, 0), (1, 1)]
         
-        new_game = GameOthello(self.size)
-        new_game.board = list(self.board)  # Deep copy the board
+        new_game = self.copy()
         new_game.board[move] = self.current_player
         
         row, col = divmod(move, self.size)
