@@ -38,5 +38,15 @@ Run the `play_game.py` script with the desired game and player options:
 To get the inline help, run:
 
 ```bash
-./bin/play_game.py --help
+$ ./bin/play_game.py --help
+usage: play_game.py [-h] [--game {tictactoe,connect4,othello}] [--first {human,ai}]
+
+Play a game of Tic-Tac-Toe, Connect4, or Othello against an AI.
+
+options:
+  -h, --help            show this help message and exit
+  --game {tictactoe,connect4,othello}, -g {tictactoe,connect4,othello}
+                        Choose the game to play. (default: tictactoe)
+  --first {human,ai}, -f {human,ai}
+                        Choose who plays first. (default: human)
 ```

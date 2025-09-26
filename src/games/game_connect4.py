@@ -1,4 +1,4 @@
-from ..protocols.game_protocol import GameProtocol
+from src.protocols.game_protocol import GameProtocol
 from typing import List, Optional
 
 
@@ -17,15 +17,15 @@ class GameConnect4(GameProtocol):
 
     def __repr__(self) -> str:
         """Prints a human-readable board representation, showing move indices on empty cells."""
-        s: str = ""
-        s += "   ".join([str(j) for j in range(self.cols)]) + "\n"  # Column indices
+        output: str = ""
+        output += "   ".join([str(j) for j in range(self.cols)]) + "\n"  # Column indices
         for i in range(self.rows):
             row = self.board[i * self.cols : (i + 1) * self.cols]
-            s += " | ".join([("X" if cell == 1 else "O" if cell == -1 else " ") for j, cell in enumerate(row)])
-            s += "\n"
+            output += " | ".join([("X" if cell == 1 else "O" if cell == -1 else " ") for j, cell in enumerate(row)])
+            output += "\n"
             if i < self.rows - 1:
-                s += "--" + "+---" * (self.cols - 1) + "\n"
-        return s
+                output += "--" + "+---" * (self.cols - 1) + "\n"
+        return output
 
     def get_legal_moves(self) -> List[int]:
         """Returns a list of column indices (0 to cols-1) where moves can be made."""

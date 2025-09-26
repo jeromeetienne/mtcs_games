@@ -18,7 +18,7 @@ class PlayerHuman(PlayerProtocol):
         print(f"👤 Your Turn ({self.marker}). Legal moves are: {game.get_legal_moves()}")
         while True:
             try:
-                move_input = input("Enter your move (index 0-8): ")
+                move_input = input("Enter your move: ")
                 # Check for EOF/Ctrl+D and exit gracefully
                 if move_input is None:
                     raise EOFError()

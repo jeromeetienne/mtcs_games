@@ -1,4 +1,4 @@
-from ..protocols.game_protocol import GameProtocol
+from src.protocols.game_protocol import GameProtocol
 from typing import List, Optional
 
 
@@ -22,14 +22,14 @@ class GameOthello(GameProtocol):
 
     def __repr__(self) -> str:
         """Prints a human-readable board representation, showing move indices on empty cells."""
-        s: str = ""
+        output: str = ""
         for i in range(self.size):
             row = self.board[i * self.size : (i + 1) * self.size]
-            s += " | ".join(["X " if cell == 1 else "O " if cell == -1 else str(i * self.size + j).rjust(2) for j, cell in enumerate(row)])
-            s += "\n"
+            output += " | ".join(["X " if cell == 1 else "O " if cell == -1 else str(i * self.size + j).rjust(2) for j, cell in enumerate(row)])
+            output += "\n"
             if i < self.size - 1:
-                s += "---" + "+----" * (self.size - 1) + "\n"
-        return s
+                output += "---" + "+----" * (self.size - 1) + "\n"
+        return output
 
     def get_legal_moves(self) -> List[int]:
         """Returns a list of indices where moves can be made."""
