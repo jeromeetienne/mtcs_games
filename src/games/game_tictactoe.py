@@ -107,6 +107,9 @@ class GameTicTacToe(GameProtocol):
         """True if there's a winner or a draw."""
         return self.check_win() is not None
 
+###############################################################################
+#   --- Example Usage (Unchanged) ---
+#
 if __name__ == "__main__":
     game = GameTicTacToe()
     print("Initial Game State:")

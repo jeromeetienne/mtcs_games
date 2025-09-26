@@ -143,3 +143,32 @@ class GameOthello(GameProtocol):
     def is_game_over(self) -> bool:
         """Returns True if the game is over (win or draw), else False."""
         return self.check_win() is not None
+
+###############################################################################
+#   --- Example Usage (Unchanged) ---
+#
+if __name__ == "__main__":
+    game = GameOthello()
+    print("Initial Game State:")
+    print(game)
+    print("Legal Moves:", game.get_legal_moves())
+    while not game.is_game_over():
+        legal_moves = game.get_legal_moves()
+        move = legal_moves[0] if legal_moves else -1
+        if move == -1:
+            print("No legal moves available. Passing turn.")
+            game.current_player = -game.current_player
+            continue
+        print(f"Player {'X' if game.current_player == 1 else 'O'} plays move at index {move}")
+        game = game.make_move(move)
+        print(game)
+        print("Legal Moves:", game.get_legal_moves())
+    
+    print("Game Over!")
+    result = game.check_win()
+    if result == 1:
+        print("Player X wins!")
+    elif result == -1:
+        print("Player O wins!")
+    else:
+        print("It's a draw!")

@@ -117,11 +117,11 @@ class PlayerMCTS(PlayerProtocol):
     def _expand_node(self, node: MCTSNode) -> MCTSNode:
         """The Expansion phase: Select an unexpanded move and create a new child."""
         unexpanded_moves = node.unexpanded_moves()
-        move = self.rnd_generator.choice(unexpanded_moves)
+        random_move = self.rnd_generator.choice(unexpanded_moves)
         
-        new_game_state = node.game_state.make_move(move)
-        new_node = MCTSNode(new_game_state, parent=node, parent_move=move)
-        node.children[move] = new_node
+        new_game_state = node.game_state.make_move(random_move)
+        new_node = MCTSNode(new_game_state, parent=node, parent_move=random_move)
+        node.children[random_move] = new_node
         
         return new_node
 

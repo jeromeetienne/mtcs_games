@@ -110,7 +110,10 @@ class GameConnect4(GameProtocol):
     def is_game_over(self) -> bool:
         """Returns True if the game is over (win or draw), else False."""
         return self.check_win() is not None
-    
+
+###############################################################################
+#   --- Example Usage (Unchanged) ---
+#
 if __name__ == "__main__":
     game = GameConnect4()
     print(game)
