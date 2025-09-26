@@ -20,7 +20,7 @@ from src.protocols.game_protocol import GameProtocol
 ###############################################################################
 #   Game Loop
 #
-def play_game(game: GameProtocol, player1: PlayerProtocol, player2: PlayerProtocol) -> None:
+def play_game(game: GameProtocol, player1: PlayerProtocol, player2: PlayerProtocol) -> int:
     """
     Plays a game of Tic-Tac-Toe between a HumanPlayer and a RandomPlayer.
 
@@ -61,8 +61,12 @@ def play_game(game: GameProtocol, player1: PlayerProtocol, player2: PlayerProtoc
         print(f"🎉 **Player X ({players[1].marker}) Wins!** 🎉")
     elif result == -1:
         print(f"💔 **Player O ({players[-1].marker}) Wins!** 💔")
-    else: # result == 0
+    elif result == 0:
         print("🤝 **It's a Draw!** 🤝")
+    else:
+        assert False, "Unexpected game result."
+
+    return result
 
 
 ###############################################################################
@@ -74,11 +78,13 @@ if __name__ == "__main__":
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
     parser.add_argument('--game', '-g', choices=['tictactoe', 'connect4', 'othello'], default='tictactoe', help="Choose the game to play.")
+    parser.add_argument('--games_per_match', '-gpm', type=int, default=1, help="Number of games to play in a match.")
     parser.add_argument('--first', '-f', choices=['human', 'ai', 'random'], default='human', help="Choose who plays first.")
     parser.add_argument('--second', '-s', choices=['human', 'ai', 'random'], default='ai', help="Choose who plays second.")
     parser.add_argument('--simulations', '-sim', type=int, default=1000, help="Number of simulations for MCTS.")
     parser.add_argument('--exploration', '-exp', type=float, default=1.4, help="Exploration parameter for MCTS.")
-    args = parser.parse_args()
+    args = parser.parse_args() # Example args for testing
+    # args = parser.parse_args(['-g', 'connect4', '-f', 'ai', '-s', 'human']) # Example args for testing
 
     # init game
     if args.game == 'tictactoe':
@@ -94,7 +100,7 @@ if __name__ == "__main__":
     if args.first == 'human':
         player1 = PlayerHuman(1)
     elif args.first == 'ai':
-        player1 = PlayerMCTS(1, simulations=args.simulations, c_param=args.exploration)
+        player1 = PlayerMCTS(1, simulations=args.simulations, c_param=args.exploration, seed=1)
     elif args.first == 'random':
         player1 = PlayerRandom(1)
     else:
@@ -104,12 +110,24 @@ if __name__ == "__main__":
     if args.second == 'human':
         player2 = PlayerHuman(-1)
     elif args.second == 'ai':
-        player2 = PlayerMCTS(-1, simulations=args.simulations, c_param=args.exploration)
+        player2 = PlayerMCTS(-1, simulations=args.simulations, c_param=args.exploration, seed=2 )
     elif args.second == 'random':
         player2 = PlayerRandom(-1)
     else:
         assert False, "Invalid second player choice."
     
 
-    # start the game
-    play_game(game, player1, player2)
+    # Play the match
+    game_count = args.games_per_match
+    match_score = 0
+    for game_index in range(game_count):
+        # start the game
+        game_result = play_game(game, player1, player2)
+        print(f"Game {game_index + 1}th result: {game_result}")
+
+        match_score += game_result
+
+    print("\n=== Tournament Summary ===")
+    print(f"Total Games Played: {game_count}")
+    print(f"Tournament Score: {match_score}")
+
