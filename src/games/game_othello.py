@@ -80,10 +80,6 @@ class GameOthello(GameProtocol):
                     c += dc
         return list(legal_moves)
     
-    def get_game_state(self) -> List[int]:
-        """Returns the current game state as a list."""
-        return list(self.board)
-    
     def copy(self) -> "GameOthello":
         """Returns a deep copy of the game."""
         new_game = GameOthello(self.size)

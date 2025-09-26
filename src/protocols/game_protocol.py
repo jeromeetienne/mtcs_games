@@ -11,10 +11,6 @@ class GameProtocol(Protocol):
         """Returns a list of legal moves."""
         ...
 
-    def get_game_state(self) -> List[int]:
-        """Returns the current game state as a list."""
-        ...
-
     def copy(self) -> "GameProtocol":
         """Returns a deep copy of the game."""
         ...

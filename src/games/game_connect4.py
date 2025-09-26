@@ -50,10 +50,7 @@ class GameConnect4(GameProtocol):
                 legal_moves.append(col)
         return legal_moves
     
-    def get_game_state(self) -> List[int]:
-        """Returns the current game state as a list."""
-        return list(self.board)
-    
+
     def copy(self) -> "GameConnect4":
         """Returns a deep copy of the current game state."""
         new_game = GameConnect4(self.rows, self.cols)

@@ -47,10 +47,6 @@ class GameTicTacToe(GameProtocol):
         """Returns a list of indices (0-8) where moves can be made."""
         return [i for i, cell in enumerate(self.board) if cell == 0]
     
-    def get_game_state(self) -> List[int]:
-        """Returns the current game state as a list."""
-        return list(self.board)
-    
     def copy(self) -> "GameTicTacToe":
         """Returns a deep copy of the current game state."""
         new_game = GameTicTacToe(self.size)
