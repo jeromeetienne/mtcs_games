@@ -42,8 +42,8 @@ Run the `play_game.py` script with the desired game and player options:
 To get the inline help, run:
 
 ```bash
-$ ./bin/play_game.py --help
-usage: play_game.py [-h] [--game {tictactoe,connect4,othello}] [--first {human,ai}]
+» ./bin/play_game.py -h                                                                                                 1 ↵
+usage: play_game.py [-h] [--game {tictactoe,connect4,othello}] [--first {human,ai,random}] [--second {human,ai,random}] [--simulations SIMULATIONS] [--exploration EXPLORATION]
 
 Play a game of Tic-Tac-Toe, Connect4, or Othello against an AI.
 
@@ -51,6 +51,12 @@ options:
   -h, --help            show this help message and exit
   --game {tictactoe,connect4,othello}, -g {tictactoe,connect4,othello}
                         Choose the game to play. (default: tictactoe)
-  --first {human,ai}, -f {human,ai}
+  --first {human,ai,random}, -f {human,ai,random}
                         Choose who plays first. (default: human)
+  --second {human,ai,random}, -s {human,ai,random}
+                        Choose who plays second. (default: ai)
+  --simulations SIMULATIONS, -sim SIMULATIONS
+                        Number of simulations for MCTS. (default: 1000)
+  --exploration EXPLORATION, -exp EXPLORATION
+                        Exploration parameter for MCTS. (default: 1.4)
 ```

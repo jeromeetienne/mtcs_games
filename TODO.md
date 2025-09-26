@@ -1,9 +1,4 @@
 # TODO
-- Do a better UI
-  - color in the output
-  - make it possible to select the legal moves by arrow keys
-- in game_protocol, add a .copy() method to clone a game state
-  - PRO it will be clearer
 - do gif of games played
 - MTCS make it possible to reuse the tree between moves
   - currently the tree is discarded after each move
@@ -18,6 +13,11 @@
   - e.g. uci
 
 ## DONE
+- DONE Do a better UI
+  - color in the output
+- DONE in game_protocol, add a .copy() method to clone a game state
+  - PRO it will be clearer
+- DONE make it possible to select the legal moves by arrow keys
 - DONE add a way to set the number of simulations for MTCS
   - add a --simulations argument to play_game.py
 - DONE add a way to set the exploration parameter for MTCS
