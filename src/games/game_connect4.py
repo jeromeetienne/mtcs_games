@@ -38,6 +38,13 @@ class GameConnect4(GameProtocol):
     def get_game_state(self) -> List[int]:
         """Returns the current game state as a list."""
         return list(self.board)
+    
+    def copy(self) -> "GameConnect4":
+        """Returns a deep copy of the current game state."""
+        new_game = GameConnect4(self.rows, self.cols)
+        new_game.board = list(self.board)  # Deep copy the board
+        new_game.current_player = self.current_player
+        return new_game
 
     def make_move(self, move: int) -> "GameConnect4":
         """
@@ -47,16 +54,18 @@ class GameConnect4(GameProtocol):
         if move < 0 or move >= self.cols or self.board[move] != 0:
             raise ValueError("Invalid move attempted on a full or out-of-bounds column.")
 
-
+        # Create a new game state
+        new_game = self.copy()
+        
         # Play the move in the lowest available row in the specified column
-        new_game = GameConnect4(self.rows, self.cols)
-        new_game.board = list(self.board)  # Deep copy the board
         for row in range(self.rows - 1, -1, -1):
-            idx = row * self.cols + move
-            if new_game.board[idx] == 0:
-                new_game.board[idx] = self.current_player
+            square_idx = row * self.cols + move
+            if new_game.board[square_idx] == 0:
+                new_game.board[square_idx] = self.current_player
                 break
-        new_game.current_player = -self.current_player  # Switch player
+
+        # Switch player
+        new_game.current_player = -self.current_player  
         return new_game
     
     def check_win(self) -> Optional[int]:

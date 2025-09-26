@@ -35,6 +35,13 @@ class GameTicTacToe(GameProtocol):
     def get_game_state(self) -> List[int]:
         """Returns the current game state as a list."""
         return list(self.board)
+    
+    def copy(self) -> "GameTicTacToe":
+        """Returns a deep copy of the current game state."""
+        new_game = GameTicTacToe(self.size)
+        new_game.board = list(self.board)  # Deep copy the board
+        new_game.current_player = self.current_player
+        return new_game
 
     def make_move(self, move: int) -> "GameTicTacToe":
         """
@@ -44,10 +51,12 @@ class GameTicTacToe(GameProtocol):
         if self.board[move] != 0:
             raise ValueError("Invalid move attempted on a non-empty cell.")
             
-        new_game = GameTicTacToe(self.size)
-        new_game.board = list(self.board)  # Deep copy the board
+        # Create a new game state
+        new_game = self.copy()
+        # Play the move
         new_game.board[move] = self.current_player
-        new_game.current_player = -self.current_player  # Switch player
+        # Switch player
+        new_game.current_player = -self.current_player  
         return new_game
 
     def check_win(self) -> Optional[int]:
