@@ -1,5 +1,12 @@
-from src.protocols.game_protocol import GameProtocol
+# stdlib imports
 from typing import List, Optional
+
+# pip imports
+import colorama
+
+# local imports
+from src.protocols.game_protocol import GameProtocol
+
 
 
 class GameOthello(GameProtocol):
@@ -23,11 +30,25 @@ class GameOthello(GameProtocol):
     def __repr__(self) -> str:
         """Prints a human-readable board representation, showing move indices on empty cells."""
         output: str = ""
-        for i in range(self.size):
-            row = self.board[i * self.size : (i + 1) * self.size]
-            output += " | ".join(["X " if cell == 1 else "O " if cell == -1 else str(i * self.size + j).rjust(2) for j, cell in enumerate(row)])
+        legal_moves = self.get_legal_moves()
+        for row_index in range(self.size):
+            row = self.board[row_index * self.size : (row_index + 1) * self.size]
+            row_strs = []
+            for col_index, cell in enumerate(row):
+                if cell == 1:
+                    row_strs.append(colorama.Fore.GREEN + "X " + colorama.Style.RESET_ALL)
+                elif cell == -1:
+                    row_strs.append(colorama.Fore.MAGENTA + "O " + colorama.Style.RESET_ALL)
+                else:
+                    square_index = row_index * self.size + col_index
+                    square_str = str(square_index).rjust(2)
+                    if square_index in legal_moves:
+                        row_strs.append(colorama.Fore.YELLOW + square_str + colorama.Style.RESET_ALL)
+                    else:
+                        row_strs.append("  ")
+            output += " | ".join(row_strs)
             output += "\n"
-            if i < self.size - 1:
+            if row_index < self.size - 1:
                 output += "---" + "+----" * (self.size - 1) + "\n"
         return output
 
