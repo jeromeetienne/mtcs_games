@@ -70,11 +70,15 @@ class PlayerMCTS(PlayerProtocol):
     """
     An AI player that uses Monte Carlo Tree Search to determine the best move.
     """
-    def __init__(self, player_id: int, simulations: int = 1000, c_param: float = 1.4):
+    def __init__(self, player_id: int, simulations: int = 1000, c_param: float = 1.4, seed: Optional[int] = None):
         self.player_id: int = player_id
         self.marker: str = 'X' if player_id == 1 else 'O'
         self.simulations: int = simulations
         self.c_param: float = c_param # Exploration constant for UCT
+        self.rnd_generator = random.Random()
+        if seed is not None:
+            self.rnd_generator.seed(seed)
+
 
     def get_move(self, game: GameProtocol) -> int:
         """
@@ -113,7 +117,7 @@ class PlayerMCTS(PlayerProtocol):
     def _expand_node(self, node: MCTSNode) -> MCTSNode:
         """The Expansion phase: Select an unexpanded move and create a new child."""
         unexpanded_moves = node.unexpanded_moves()
-        move = random.choice(unexpanded_moves)
+        move = self.rnd_generator.choice(unexpanded_moves)
         
         new_game_state = node.game_state.make_move(move)
         new_node = MCTSNode(new_game_state, parent=node, parent_move=move)
@@ -130,8 +134,8 @@ class PlayerMCTS(PlayerProtocol):
         while not current_game.is_game_over():
             legal_moves = current_game.get_legal_moves()
             if not legal_moves: # Should be handled by is_game_over but good for safety
-                return 0 
-            move = random.choice(legal_moves)
+                return 0
+            move = self.rnd_generator.choice(legal_moves)
             current_game = current_game.make_move(move)
 
         # winner  = typing.cast(int, current_game.check_win())
