@@ -1,5 +1,11 @@
+# stdlib imports
 import random
 from typing import List, Optional
+
+# pip imports
+import colorama
+
+# local imports
 from src.protocols.game_protocol import GameProtocol
 
 
@@ -20,11 +26,20 @@ class GameTicTacToe(GameProtocol):
     def __repr__(self) -> str:
         """Prints a human-readable board representation, showing move indices on empty cells."""
         output: str = ""
-        for i in range(self.size):
-            row = self.board[i * self.size : (i + 1) * self.size]
-            output += " | ".join(["X" if cell == 1 else "O" if cell == -1 else str(i * self.size + j) for j, cell in enumerate(row)])
+        for row_index in range(self.size):
+            row = self.board[row_index * self.size : (row_index + 1) * self.size]
+            row_display = []
+            for col_index, cell in enumerate(row):
+                if cell == 1:
+                    row_display.append(colorama.Fore.GREEN +"X" + colorama.Style.RESET_ALL)
+                elif cell == -1:
+                    row_display.append(colorama.Fore.RED +"O" + colorama.Style.RESET_ALL)
+                else:
+                    square_index = row_index * self.size + col_index
+                    row_display.append(str(square_index))
+            output += " | ".join(row_display)
             output += "\n"
-            if i < self.size - 1:
+            if row_index < self.size - 1:
                 output += "--" + "+---" * (self.size - 1) + "\n"
         return output
 

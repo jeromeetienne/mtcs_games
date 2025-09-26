@@ -28,7 +28,7 @@ class GameOthello(GameProtocol):
         self.current_player: int = 1
 
     def __repr__(self) -> str:
-        """Prints a human-readable board representation, showing move indices on empty cells."""
+        """Prints a human-readable board representation, showing move indices on empty cells which are legal moves."""
         output: str = ""
         legal_moves = self.get_legal_moves()
         for row_index in range(self.size):

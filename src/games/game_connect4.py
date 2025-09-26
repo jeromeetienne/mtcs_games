@@ -1,5 +1,11 @@
-from src.protocols.game_protocol import GameProtocol
+# stdlib imports
 from typing import List, Optional
+
+# pip imports
+import colorama
+
+# local imports
+from src.protocols.game_protocol import GameProtocol
 
 
 class GameConnect4(GameProtocol):
@@ -19,11 +25,20 @@ class GameConnect4(GameProtocol):
         """Prints a human-readable board representation, showing move indices on empty cells."""
         output: str = ""
         output += "   ".join([str(j) for j in range(self.cols)]) + "\n"  # Column indices
-        for i in range(self.rows):
-            row = self.board[i * self.cols : (i + 1) * self.cols]
-            output += " | ".join([("X" if cell == 1 else "O" if cell == -1 else " ") for j, cell in enumerate(row)])
+        for row_index in range(self.rows):
+            row = self.board[row_index * self.cols : (row_index + 1) * self.cols]
+            row_symbols = []
+            for col_index, cell in enumerate(row):
+                if cell == 1:
+                    symbol = colorama.Fore.GREEN + "X" + colorama.Style.RESET_ALL
+                elif cell == -1:
+                    symbol = colorama.Fore.RED + "O" + colorama.Style.RESET_ALL
+                else:
+                    symbol = " "
+                row_symbols.append(symbol)
+            output += " | ".join(row_symbols)
             output += "\n"
-            if i < self.rows - 1:
+            if row_index < self.rows - 1:
                 output += "--" + "+---" * (self.cols - 1) + "\n"
         return output
 
