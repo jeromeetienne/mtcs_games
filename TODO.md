@@ -6,3 +6,6 @@
   - how would that work with MTCS ?
 - how to get the move representation for chess ?
   - e.g. uci
+- Do a better UI
+  - color in the output
+  - make it possible to select the legal moves by arrow keys

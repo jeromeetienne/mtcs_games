@@ -5,6 +5,9 @@ import typing
 from ..protocols.player_protocol import PlayerProtocol
 from ..protocols.game_protocol import GameProtocol
 
+###############################################################################
+#   MCTS Tree Node
+#
 class MCTSNode:
     """
     Represents a single node in the Monte Carlo Tree Search tree.
@@ -60,6 +63,9 @@ class MCTSNode:
         expanded_moves = set(self.children.keys())
         return list(all_moves - expanded_moves)
     
+###############################################################################
+#   MCTS Player Implementation
+#
 class PlayerMCTS(PlayerProtocol):
     """
     An AI player that uses Monte Carlo Tree Search to determine the best move.

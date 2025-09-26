@@ -9,11 +9,11 @@ lint_checker: ## Run lint checker on source files
 ######################################################
 
 play_tictactoe:	## Play Tic Tac Toe
-	python3 bin/play.py --game tictactoe
+	python3 bin/play_game.py --game tictactoe
 
 play_connect4:	## Play Connect 4
-	python3 bin/play.py --game connect4
+	python3 bin/play_game.py --game connect4
 
 play_othello:	## Play Othello
-	python3 bin/play.py --game othello
+	python3 bin/play_game.py --game othello
 
