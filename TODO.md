@@ -5,10 +5,6 @@
 - in game_protocol, add a .copy() method to clone a game state
   - PRO it will be clearer
 - do gif of games played
-- add a way to set the number of simulations for MTCS
-  - add a --simulations argument to play_game.py
-- add a way to set the exploration parameter for MTCS
-  - add a --exploration argument to play_game.py
 - MTCS make it possible to reuse the tree between moves
   - currently the tree is discarded after each move
   - this would require to keep track of the root node and its children
@@ -22,6 +18,10 @@
   - e.g. uci
 
 ## DONE
+- DONE add a way to set the number of simulations for MTCS
+  - add a --simulations argument to play_game.py
+- DONE add a way to set the exploration parameter for MTCS
+  - add a --exploration argument to play_game.py
 - DONE make it possible to pick the random player too
 - DONE make it possible to play MTCS vs MTCS
   - add a --second argument to play_game.py
