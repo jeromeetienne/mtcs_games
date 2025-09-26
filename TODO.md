@@ -16,3 +16,7 @@
 - add a way to set the exploration parameter for MTCS
   - add a --exploration argument to play_game.py
 - make it possible to pick the random player too
+- make it possible to reuse the tree between moves
+  - currently the tree is discarded after each move
+  - this would require to keep track of the root node and its children
+  - and to update the root node after each move
