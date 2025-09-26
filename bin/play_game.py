@@ -67,8 +67,11 @@ if __name__ == "__main__":
     parser.add_argument('--game', '-g', choices=['tictactoe', 'connect4', 'othello'], default='tictactoe', help="Choose the game to play.")
     parser.add_argument('--first', '-f', choices=['human', 'ai', 'random'], default='human', help="Choose who plays first.")
     parser.add_argument('--second', '-s', choices=['human', 'ai', 'random'], default='ai', help="Choose who plays second.")
+    parser.add_argument('--simulations', '-sim', type=int, default=1000, help="Number of simulations for MCTS.")
+    parser.add_argument('--exploration', '-exp', type=float, default=1.4, help="Exploration parameter for MCTS.")
     args = parser.parse_args()
 
+    # init game
     if args.game == 'tictactoe':
         game = GameTicTacToe()
     elif args.game == 'connect4':
@@ -82,7 +85,7 @@ if __name__ == "__main__":
     if args.first == 'human':
         player1 = PlayerHuman(1)
     elif args.first == 'ai':
-        player1 = PlayerMCTS(1)
+        player1 = PlayerMCTS(1, simulations=args.simulations, c_param=args.exploration)
     elif args.first == 'random':
         player1 = PlayerRandom(1)
     else:
@@ -92,7 +95,7 @@ if __name__ == "__main__":
     if args.second == 'human':
         player2 = PlayerHuman(-1)
     elif args.second == 'ai':
-        player2 = PlayerMCTS(-1)
+        player2 = PlayerMCTS(-1, simulations=args.simulations, c_param=args.exploration)
     elif args.second == 'random':
         player2 = PlayerRandom(-1)
     else:
