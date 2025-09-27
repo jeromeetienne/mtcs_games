@@ -22,7 +22,6 @@ class GameConnect4(BaseGame):
         # The board is a flattened list for easy representation,
         # where 0=Empty, 1='X' (Player 1), -1='O' (Player -1)
         self.board: List[int] = [0] * (rows * cols)
-        # 1: 'X', -1: 'O'
         self.current_player = PlayerID(1)
 
     def __repr__(self) -> str:

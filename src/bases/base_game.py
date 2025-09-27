@@ -10,7 +10,11 @@ class BaseGame(ABC):
     board: List[int]
     """The game board as a list of integers"""
     current_player: PlayerID
-    """the player to move: 1 or -1"""
+    """the player to move next"""
+
+    def is_game_over(self) -> bool:
+        """Returns True if the game is over (win or draw), else False."""
+        return self.get_winner() is not None
 
     @abstractmethod
     def get_legal_moves(self) -> List[Move]:
@@ -31,7 +35,3 @@ class BaseGame(ABC):
     def get_winner(self) -> GameResult | None:
         """Returns 1 if player 1 wins, -1 if player -1 wins, 0 if draw, None if ongoing."""
         pass
-
-    def is_game_over(self) -> bool:
-        """Returns True if the game is over (win or draw), else False."""
-        return self.get_winner() is not None
