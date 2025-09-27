@@ -1,9 +1,5 @@
 # TODO
 - do gif of games played
-- MTCS make it possible to reuse the tree between moves
-  - currently the tree is discarded after each move
-  - this would require to keep track of the root node and its children
-  - and to update the root node after each move
 - make the move an actual `Move` type, and a `Square` type for chess
   - currently it's just an int
 - add checkers game ?
@@ -13,6 +9,11 @@
   - e.g. uci
 
 ## DONE
+- DONE MTCS make it possible to reuse the tree between moves
+  - RESULT: save barely 10% in othello, not worth the complexity
+  - currently the tree is discarded after each move
+  - this would require to keep track of the root node and its children
+  - and to update the root node after each move
 - DONE Do a better UI
   - color in the output
 - DONE in game_protocol, add a .copy() method to clone a game state
