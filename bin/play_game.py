@@ -8,6 +8,7 @@ and an AI player (Random or MCTS).
 import argparse
 
 # local imports
+from src.bases.types import PlayerID
 from src.bases.move import Move
 from src.games.game_tictactoe import GameTicTacToe
 from src.games.game_connect4 import GameConnect4
@@ -92,21 +93,21 @@ if __name__ == "__main__":
 
     # init player1
     if args.first == "human":
-        player1 = PlayerHuman(1)
+        player1 = PlayerHuman(PlayerID(1))
     elif args.first == "ai":
-        player1 = PlayerMCTS(1, simulations=args.simulations, c_param=args.exploration, seed=args.seed)
+        player1 = PlayerMCTS(PlayerID(1), simulations=args.simulations, c_param=args.exploration, seed=args.seed)
     elif args.first == "random":
-        player1 = PlayerRandom(1)
+        player1 = PlayerRandom(PlayerID(1))
     else:
         assert False, "Invalid first player choice."
 
     # init player2
     if args.second == "human":
-        player2 = PlayerHuman(-1)
+        player2 = PlayerHuman(PlayerID(-1))
     elif args.second == "ai":
-        player2 = PlayerMCTS(-1, simulations=args.simulations, c_param=args.exploration, seed=args.seed)
+        player2 = PlayerMCTS(PlayerID(-1), simulations=args.simulations, c_param=args.exploration, seed=args.seed)
     elif args.second == "random":
-        player2 = PlayerRandom(-1)
+        player2 = PlayerRandom(PlayerID(-1))
     else:
         assert False, "Invalid second player choice."
 

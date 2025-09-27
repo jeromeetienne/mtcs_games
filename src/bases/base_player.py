@@ -2,7 +2,9 @@
 from abc import ABC, abstractmethod
 from typing import Any
 
+
 # local imports
+from .types import PlayerID, PlayerMarker, player_id_to_marker
 from .move import Move
 from .base_game import BaseGame
 
@@ -16,12 +18,12 @@ class BasePlayer(ABC):
     """
 
     # Concrete implementations should set these attributes in their __init__
-    player_id: int
-    marker: str
+    player_id: PlayerID
+    marker: PlayerMarker
 
-    def __init__(self, player_id: int):
-        self.player_id = player_id
-        self.marker = 'X' if player_id == 1 else 'O'
+    def __init__(self, player_id: PlayerID):
+        self.player_id: PlayerID = player_id
+        self.marker: PlayerMarker = player_id_to_marker(player_id)
 
     @abstractmethod
     def get_move(self, game: BaseGame) -> Move:

@@ -6,6 +6,7 @@ from typing import Dict, List, Optional, Tuple
 
 # local imports
 from src.bases.move import Move
+from src.bases.types import PlayerID, PlayerMarker, player_id_to_marker
 from src.bases.base_player import BasePlayer
 from src.bases.base_game import BaseGame
 
@@ -74,9 +75,9 @@ class PlayerMCTS(BasePlayer):
     """
     An AI player that uses Monte Carlo Tree Search to determine the best move.
     """
-    def __init__(self, player_id: int, simulations: int = 1000, c_param: float = 1.4, seed: int | None = None):
-        self.player_id: int = player_id
-        self.marker: str = 'X' if player_id == 1 else 'O'
+    def __init__(self, player_id: PlayerID, simulations: int = 1000, c_param: float = 1.4, seed: int | None = None):
+        self.player_id: PlayerID = player_id
+        self.marker: PlayerMarker = player_id_to_marker(player_id)
         self.simulations: int = simulations
         self.c_param: float = c_param # Exploration constant for UCT
         self.rnd_generator = random.Random()
