@@ -11,7 +11,7 @@ import argparse
 from src.games.game_tictactoe import GameTicTacToe
 from src.games.game_connect4 import GameConnect4
 from src.games.game_othello import GameOthello
-from src.players.player_human_cooked import PlayerHuman
+from src.players.player_human import PlayerHuman
 from src.players.player_mtcs import PlayerMCTS
 from src.players.player_random import PlayerRandom
 from src.protocols.player_protocol import PlayerProtocol

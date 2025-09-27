@@ -12,7 +12,6 @@ MTCS doesn't need to know the rules of the game, it just needs to be able to sim
 No heuristics are used, just pure random simulations.
 MTCS is implemented in the `players` module, with a dedicated class for the MCTS player.
 
-
 ## How to install
 
 Create a virtual environment and install the required packages:

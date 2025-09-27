@@ -1,8 +1,16 @@
+# stdlib imports
 import sys
+import typing
+# pip imports
+from simple_term_menu import TerminalMenu
 
+# local imports
 from ..protocols.player_protocol import PlayerProtocol
 from ..protocols.game_protocol import GameProtocol
 
+###############################################################################
+#   Human Player
+#
 class PlayerHuman(PlayerProtocol):
     """
     Represents a player whose moves are decided by human input.
@@ -18,7 +26,18 @@ class PlayerHuman(PlayerProtocol):
         print(f"👤 Your Turn ({self.marker}). Legal moves are: {game.get_legal_moves()}")
         while True:
             try:
-                move_input = input("Enter your move: ")
+                legal_moves = game.get_legal_moves()
+                legal_moves.sort()
+
+                # Show a terminal menu for move selection
+                menu_options = [str(move) for move in legal_moves]
+                terminal_menu = TerminalMenu(menu_options, title="Select your move:")
+                menu_entry_index = terminal_menu.show()
+                assert menu_entry_index is not None, "No move selected."
+                menu_entry_index = typing.cast(int, menu_entry_index)
+                # Get the move from the selected menu option
+                move_input: int = int(menu_options[menu_entry_index])
+
                 # Check for EOF/Ctrl+D and exit gracefully
                 if move_input is None:
                     raise EOFError()

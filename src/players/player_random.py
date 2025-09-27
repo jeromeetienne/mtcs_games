@@ -1,5 +1,7 @@
+# stdlib imports
 import random
-from typing import runtime_checkable
+
+# local imports
 from ..protocols.player_protocol import PlayerProtocol
 from ..protocols.game_protocol import GameProtocol
 
