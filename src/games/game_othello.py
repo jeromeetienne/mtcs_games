@@ -7,8 +7,6 @@ import colorama
 # local imports
 from src.bases.game_base import GameBase
 
-
-
 class GameOthello(GameBase):
     """
     Represents the state and rules of an Othello game.
