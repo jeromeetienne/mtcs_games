@@ -2,10 +2,10 @@
 import random
 
 # local imports
-from ..protocols.player_protocol import PlayerProtocol
-from ..protocols.game_protocol import GameProtocol
+from src.bases.player_base import PlayerBase
+from src.bases.game_base import GameBase
 
-class PlayerRandom(PlayerProtocol):
+class PlayerRandom(PlayerBase):
     """
     Represents an AI player that chooses a move randomly from legal options.
     """
@@ -13,7 +13,7 @@ class PlayerRandom(PlayerProtocol):
         self.player_id: int = player_id
         self.marker: str = 'X' if player_id == 1 else 'O'
 
-    def get_move(self, game: GameProtocol) -> int:
+    def get_move(self, game: GameBase) -> int:
         """
         Picks a random move from the list of legal moves.
         """

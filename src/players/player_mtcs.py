@@ -2,8 +2,8 @@ import math
 from typing import Dict, List, Optional, Tuple
 import random
 import typing
-from ..protocols.player_protocol import PlayerProtocol
-from ..protocols.game_protocol import GameProtocol
+from src.bases.player_base import PlayerBase
+from src.bases.game_base import GameBase
 
 ###############################################################################
 #   MCTS Tree Node
@@ -12,8 +12,8 @@ class MCTSNode:
     """
     Represents a single node in the Monte Carlo Tree Search tree.
     """
-    def __init__(self, game_state: GameProtocol, parent: Optional['MCTSNode'] = None, parent_move: Optional[int] = None):
-        self.game_state: GameProtocol = game_state
+    def __init__(self, game_state: GameBase, parent: Optional['MCTSNode'] = None, parent_move: Optional[int] = None):
+        self.game_state: GameBase = game_state
         self.parent: Optional['MCTSNode'] = parent
         self.parent_move: Optional[int] = parent_move # The move that led to this state
         self.children: Dict[int, 'MCTSNode'] = {}    # Maps move (int) to child node
@@ -66,11 +66,11 @@ class MCTSNode:
 ###############################################################################
 #   MCTS Player Implementation
 #
-class PlayerMCTS(PlayerProtocol):
+class PlayerMCTS(PlayerBase):
     """
     An AI player that uses Monte Carlo Tree Search to determine the best move.
     """
-    def __init__(self, player_id: int, simulations: int = 1000, c_param: float = 1.4, seed: Optional[int] = None):
+    def __init__(self, player_id: int, simulations: int = 1000, c_param: float = 1.4, seed: int | None = None):
         self.player_id: int = player_id
         self.marker: str = 'X' if player_id == 1 else 'O'
         self.simulations: int = simulations
@@ -80,7 +80,7 @@ class PlayerMCTS(PlayerProtocol):
             self.rnd_generator.seed(seed)
 
 
-    def get_move(self, game: GameProtocol) -> int:
+    def get_move(self, game: GameBase) -> int:
         """
         Runs the MCTS algorithm for a fixed number of simulations and returns the
         best move based on the most visited child node.
@@ -125,7 +125,7 @@ class PlayerMCTS(PlayerProtocol):
         
         return new_node
 
-    def _simulate(self, game: GameProtocol) -> int:
+    def _simulate(self, game: GameBase) -> int:
         """
         The Simulation (or Playout) phase: Play a random game until a terminal state.
         Returns the winner (1, -1, or 0 for draw).

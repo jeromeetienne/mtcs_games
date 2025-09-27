@@ -8,12 +8,24 @@ lint_checker: ## Run lint checker on source files
 
 ######################################################
 
-tictactoe:	## Play Tic Tac Toe
+play_tictactoe:	## Play Tic Tac Toe
 	python3 bin/play_game.py --game tictactoe
 
-connect4:	## Play Connect 4
+play_connect4:	## Play Connect 4
 	python3 bin/play_game.py --game connect4
 
-othello:	## Play Othello
+play_othello:	## Play Othello
 	python3 bin/play_game.py --game othello
 
+#######################################################
+
+test_tictactoe: ## Run AI vs AI simulations for Tic Tac Toe
+	python3 bin/play_game.py --game tictactoe -f ai -s ai -gpm 5 -sim 5
+
+test_connect4: ## Run AI vs AI simulations for Connect 4
+	python3 bin/play_game.py --game connect4 -f ai -s ai -gpm 5 -sim 5
+
+test_othello: ## Run AI vs AI simulations for Othello
+	python3 bin/play_game.py --game othello -f ai -s ai -gpm 5 -sim 5
+
+test_all: test_tictactoe test_connect4 test_othello ## Run AI vs AI simulations for all games

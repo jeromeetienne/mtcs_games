@@ -5,11 +5,11 @@ from typing import List, Optional
 import colorama
 
 # local imports
-from src.protocols.game_protocol import GameProtocol
+from src.bases.game_base import GameBase
 
 
 
-class GameOthello(GameProtocol):
+class GameOthello(GameBase):
     """
     Represents the state and rules of an Othello game.
     """

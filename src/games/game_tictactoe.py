@@ -6,12 +6,12 @@ from typing import List, Optional
 import colorama
 
 # local imports
-from src.protocols.game_protocol import GameProtocol
+from src.bases.game_base import GameBase
 
 
 
 # --- TicTacToe Class (Unchanged) ---
-class GameTicTacToe(GameProtocol):
+class GameTicTacToe(GameBase):
     """
     Represents the state and rules of a Tic-Tac-Toe game.
     """

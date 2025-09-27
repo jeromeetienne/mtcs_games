@@ -5,13 +5,13 @@ import typing
 from simple_term_menu import TerminalMenu
 
 # local imports
-from ..protocols.player_protocol import PlayerProtocol
-from ..protocols.game_protocol import GameProtocol
+from src.bases.player_base import PlayerBase
+from src.bases.game_base import GameBase
 
 ###############################################################################
 #   Human Player
 #
-class PlayerHuman(PlayerProtocol):
+class PlayerHuman(PlayerBase):
     """
     Represents a player whose moves are decided by human input.
     """
@@ -19,7 +19,7 @@ class PlayerHuman(PlayerProtocol):
         self.player_id: int = player_id
         self.marker: str = 'X' if player_id == 1 else 'O'
 
-    def get_move(self, game: GameProtocol) -> int:
+    def get_move(self, game: GameBase) -> int:
         """
         Prompts the human for a move and validates the input.
         """
