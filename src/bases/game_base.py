@@ -31,7 +31,6 @@ class GameBase(ABC):
         """Returns 1 if player 1 wins, -1 if player -1 wins, 0 if draw, None if ongoing."""
         pass
 
-    @abstractmethod
     def is_game_over(self) -> bool:
-        """Returns True if the game is over (win or draw), False otherwise."""
-        pass
+        """Returns True if the game is over (win or draw), else False."""
+        return self.check_win() is not None

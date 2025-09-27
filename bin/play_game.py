@@ -49,13 +49,13 @@ def play_game(game: GameBase, player1: PlayerBase, player2: PlayerBase) -> int:
         print(f"\n✨ Current Board:\n{game}")
 
         # Get the move from the current player object
-        move_idx = current_player.get_move(game)
+        move = current_player.get_move(game)
 
         # Log the move
-        print(f"Player {current_player.marker} ({type(current_player).__name__}) picked move: {move_idx}")
+        print(f"Player {current_player.marker} ({type(current_player).__name__}) picked move: {move}")
 
         # Make the move and update the game state
-        game = game.make_move(Move(move_idx))
+        game = game.make_move(move)
 
     # Game Over
     print("\n--- Game Over ---")

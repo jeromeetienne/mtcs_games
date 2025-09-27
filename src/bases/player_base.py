@@ -1,6 +1,10 @@
+# stdlib imports
 from abc import ABC, abstractmethod
-from . game_base import GameBase
 from typing import Any
+
+# local imports
+from .move import Move
+from . game_base import GameBase
 
 
 class PlayerBase(ABC):
@@ -20,7 +24,7 @@ class PlayerBase(ABC):
         self.marker = 'X' if player_id == 1 else 'O'
 
     @abstractmethod
-    def get_move(self, game: GameBase) -> int:
+    def get_move(self, game: GameBase) -> Move:
         """Calculate and return the player's chosen move (index 0-8)."""
         raise NotImplementedError
 

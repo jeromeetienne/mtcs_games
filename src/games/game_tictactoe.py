@@ -9,9 +9,9 @@ import colorama
 from src.bases.game_base import GameBase
 from src.bases.move import Move
 
-
-
-# --- TicTacToe Class (Unchanged) ---
+###############################################################################
+#   Represents the state and rules of a Tic-Tac-Toe game.
+#
 class GameTicTacToe(GameBase):
     """
     Represents the state and rules of a Tic-Tac-Toe game. 
@@ -104,10 +104,6 @@ class GameTicTacToe(GameBase):
             return 0  # Draw
 
         return None # Game is still ongoing
-
-    def is_game_over(self) -> bool:
-        """True if there's a winner or a draw."""
-        return self.check_win() is not None
 
 ###############################################################################
 #   --- Example Usage (Unchanged) ---

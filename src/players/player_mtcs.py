@@ -1,7 +1,11 @@
+# stdlib imports
 import math
-from typing import Dict, List, Optional, Tuple
 import random
 import typing
+from typing import Dict, List, Optional, Tuple
+
+# local imports
+from src.bases.move import Move
 from src.bases.player_base import PlayerBase
 from src.bases.game_base import GameBase
 
@@ -27,8 +31,8 @@ class MCTSNode:
     def unexpanded_moves(self) -> List[int]:
         """Returns a list of legal moves that do not yet have a child node."""
         all_move_index = set(int(move) for move in self.game_state.get_legal_moves())
-        expanded_moves = set(self.children.keys())
-        return list(all_move_index - expanded_moves)
+        expanded_move_indices = set(self.children.keys())
+        return list(all_move_index - expanded_move_indices)
 
     def best_uct_child(self, c_param: float = 1.4) -> Tuple[int, 'MCTSNode']:
         """
@@ -80,7 +84,7 @@ class PlayerMCTS(PlayerBase):
             self.rnd_generator.seed(seed)
 
 
-    def get_move(self, game: GameBase) -> int:
+    def get_move(self, game: GameBase) -> Move:
         """
         Runs the MCTS algorithm for a fixed number of simulations and returns the
         best move based on the most visited child node.
@@ -117,11 +121,12 @@ class PlayerMCTS(PlayerBase):
     def _expand_node(self, node: MCTSNode) -> MCTSNode:
         """The Expansion phase: Select an unexpanded move and create a new child."""
         unexpanded_moves = node.unexpanded_moves()
-        random_move = self.rnd_generator.choice(unexpanded_moves)
+        random_move_idx = self.rnd_generator.choice(unexpanded_moves)
         
+        random_move = Move(random_move_idx)
         new_game_state = node.game_state.make_move(random_move)
-        new_node = MCTSNode(new_game_state, parent=node, parent_move=random_move)
-        node.children[random_move] = new_node
+        new_node = MCTSNode(new_game_state, parent=node, parent_move=random_move_idx)
+        node.children[random_move_idx] = new_node
         
         return new_node
 
@@ -136,7 +141,7 @@ class PlayerMCTS(PlayerBase):
             if not legal_moves: # Should be handled by is_game_over but good for safety
                 return 0
             move = self.rnd_generator.choice(legal_moves)
-            current_game = current_game.make_move(int(move))
+            current_game = current_game.make_move(move)
 
         # winner  = typing.cast(int, current_game.check_win())
 
@@ -162,23 +167,23 @@ class PlayerMCTS(PlayerBase):
             current_node.wins += score
             current_node = current_node.parent
 
-    def _best_move(self, root: MCTSNode) -> int:
+    def _best_move(self, root: MCTSNode) -> Move:
         """
         The final decision: Choose the move corresponding to the child with the most visits.
         """
         # We look for the most visited child, which is often more stable than the one with the highest win rate.
         best_visits = -1
-        best_move = -1
+        best_move_idx = -1
         
         for move, child in root.children.items():
             if child.visits > best_visits:
                 best_visits = child.visits
-                best_move = move
+                best_move_idx = move
                 
-        if best_move == -1:
+        if best_move_idx == -1:
             raise Exception("MCTS failed to find a move for the current state.")
             
-        return best_move
+        return Move(best_move_idx)
 
     def copy(self) -> 'PlayerMCTS':
         """Create and return a copy of this player instance."""

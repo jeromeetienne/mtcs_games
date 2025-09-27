@@ -1,6 +1,7 @@
 # stdlib imports
 import sys
 import typing
+
 # pip imports
 from simple_term_menu import TerminalMenu
 
@@ -20,7 +21,7 @@ class PlayerHuman(PlayerBase):
         self.player_id: int = player_id
         self.marker: str = 'X' if player_id == 1 else 'O'
 
-    def get_move(self, game: GameBase) -> int:
+    def get_move(self, game: GameBase) -> Move:
         """
         Prompts the human for a move and validates the input.
         """
@@ -49,7 +50,7 @@ class PlayerHuman(PlayerBase):
                 legal_moves = game.get_legal_moves()
                 
                 if move in legal_moves:
-                    return int(move)
+                    return move
                 else:
                     print(f"❌ Invalid move: {move} is not an empty cell or is outside the board range.")
             except ValueError:

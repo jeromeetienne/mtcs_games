@@ -8,6 +8,9 @@ import colorama
 from src.bases.game_base import GameBase
 from src.bases.move import Move
 
+###############################################################################
+#   Represents the state and rules of a Connect 4 game.
+#
 class GameConnect4(GameBase):
     """
     Represents the state and rules of a Connect 4 game.
@@ -107,10 +110,6 @@ class GameConnect4(GameBase):
             return 0  # Draw
         
         return None  # Game is still ongoing
-    
-    def is_game_over(self) -> bool:
-        """Returns True if the game is over (win or draw), else False."""
-        return self.check_win() is not None
 
 ###############################################################################
 #   --- Example Usage (Unchanged) ---

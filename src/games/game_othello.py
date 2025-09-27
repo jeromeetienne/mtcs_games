@@ -8,6 +8,10 @@ import colorama
 from src.bases.move import Move
 from src.bases.game_base import GameBase
 
+
+###############################################################################
+#   Represents the state and rules of an Othello game.
+#
 class GameOthello(GameBase):
     """
     Represents the state and rules of an Othello game.
@@ -139,10 +143,6 @@ class GameOthello(GameBase):
             return -1 # 'O' wins
         else:
             return 0  # Draw
-        
-    def is_game_over(self) -> bool:
-        """Returns True if the game is over (win or draw), else False."""
-        return self.check_win() is not None
 
 ###############################################################################
 #   --- Example Usage (Unchanged) ---
