@@ -179,3 +179,10 @@ class PlayerMCTS(PlayerBase):
             raise Exception("MCTS failed to find a move for the current state.")
             
         return best_move
+
+    def copy(self) -> 'PlayerMCTS':
+        """Create and return a copy of this player instance."""
+        new_player = PlayerMCTS(self.player_id, simulations=self.simulations, c_param=self.c_param)
+        # Preserve the random generator state
+        new_player.rnd_generator.setstate(self.rnd_generator.getstate())
+        return new_player

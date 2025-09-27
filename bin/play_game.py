@@ -88,17 +88,6 @@ if __name__ == "__main__":
     parser.add_argument("--exploration", "-exp", type=float, default=1.4, help="Exploration parameter for MCTS.")
     parser.add_argument("--seed", type=int, help="Random seed for reproducibility.")
     args = parser.parse_args()  # Example args for testing
-    # args = parser.parse_args(['-g', 'connect4', '-f', 'ai', '-s', 'human']) # Example args for testing
-
-    # init game
-    if args.game == "tictactoe":
-        game = GameTicTacToe()
-    elif args.game == "connect4":
-        game = GameConnect4()
-    elif args.game == "othello":
-        game = GameOthello()
-    else:
-        assert False, "Invalid game choice."
 
     # init player1
     if args.first == "human":
@@ -124,6 +113,15 @@ if __name__ == "__main__":
     game_count = args.games_per_match
     match_score = 0
     for game_index in range(game_count):
+        # Create a fresh game for each match
+        if args.game == "tictactoe":
+            game = GameTicTacToe()
+        elif args.game == "connect4":
+            game = GameConnect4()
+        elif args.game == "othello":
+            game = GameOthello()
+        else:
+            assert False, "Invalid game choice."
         # start the game
         game_result = play_game(game, player1, player2)
         print(f"Game {game_index + 1}th result: {game_result}")

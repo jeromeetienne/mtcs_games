@@ -54,3 +54,7 @@ class PlayerHuman(PlayerBase):
             except EOFError:
                 print("\nGame aborted by user.")
                 sys.exit(0) # Exit the program cleanly
+
+    def copy(self) -> 'PlayerHuman':
+        """Create and return a copy of this player instance."""
+        return PlayerHuman(self.player_id)

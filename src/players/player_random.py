@@ -26,3 +26,7 @@ class PlayerRandom(PlayerBase):
         
         # This should ideally not be reached if is_game_over is checked first
         raise Exception("AI attempted to move when no legal moves were available (Draw state).")
+
+    def copy(self) -> 'PlayerRandom':
+        """Create and return a copy of this player instance."""
+        return PlayerRandom(self.player_id)
