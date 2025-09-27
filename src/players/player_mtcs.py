@@ -26,9 +26,9 @@ class MCTSNode:
 
     def unexpanded_moves(self) -> List[int]:
         """Returns a list of legal moves that do not yet have a child node."""
-        all_moves = set(self.game_state.get_legal_moves())
+        all_move_index = set(int(move) for move in self.game_state.get_legal_moves())
         expanded_moves = set(self.children.keys())
-        return list(all_moves - expanded_moves)
+        return list(all_move_index - expanded_moves)
 
     def best_uct_child(self, c_param: float = 1.4) -> Tuple[int, 'MCTSNode']:
         """
@@ -136,7 +136,7 @@ class PlayerMCTS(PlayerBase):
             if not legal_moves: # Should be handled by is_game_over but good for safety
                 return 0
             move = self.rnd_generator.choice(legal_moves)
-            current_game = current_game.make_move(move)
+            current_game = current_game.make_move(int(move))
 
         # winner  = typing.cast(int, current_game.check_win())
 

@@ -7,6 +7,7 @@ import colorama
 
 # local imports
 from src.bases.game_base import GameBase
+from src.bases.move import Move
 
 
 
@@ -43,9 +44,9 @@ class GameTicTacToe(GameBase):
                 output += "--" + "+---" * (self.size - 1) + "\n"
         return output
 
-    def get_legal_moves(self) -> List[int]:
+    def get_legal_moves(self) -> List[Move]:
         """Returns a list of indices (0-8) where moves can be made."""
-        return [i for i, cell in enumerate(self.board) if cell == 0]
+        return [Move(i) for i, cell in enumerate(self.board) if cell == 0]
     
     def copy(self) -> "GameTicTacToe":
         """Returns a deep copy of the current game state."""
@@ -117,7 +118,7 @@ if __name__ == "__main__":
     while not game.is_game_over():
         legal_moves = game.get_legal_moves()
         move = random.choice(legal_moves)
-        game = game.make_move(move)
+        game = game.make_move(int(move))
         print(f"Player {'X' if game.current_player == -1 else 'O'} made move at index {move}")
         print(game)
     

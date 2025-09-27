@@ -1,5 +1,9 @@
+# stdlib imports
 from typing import List, Optional
 from abc import ABC, abstractmethod
+
+# local imports
+from .move import Move
 
 class GameBase(ABC):
     board: List[int]
@@ -8,7 +12,7 @@ class GameBase(ABC):
     """the player to move: 1 or -1"""
 
     @abstractmethod
-    def get_legal_moves(self) -> List[int]:
+    def get_legal_moves(self) -> List[Move]:
         """Returns a list of legal moves."""
         pass
 

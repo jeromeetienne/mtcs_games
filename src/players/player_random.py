@@ -22,7 +22,7 @@ class PlayerRandom(PlayerBase):
         if legal_moves:
             ai_move = random.choice(legal_moves)
             print(f"AI chooses move: {ai_move}")
-            return ai_move
+            return int(ai_move)
         
         # This should ideally not be reached if is_game_over is checked first
         raise Exception("AI attempted to move when no legal moves were available (Draw state).")

@@ -5,6 +5,7 @@ from typing import List, Optional
 import colorama
 
 # local imports
+from src.bases.move import Move
 from src.bases.game_base import GameBase
 
 class GameOthello(GameBase):
@@ -28,7 +29,7 @@ class GameOthello(GameBase):
     def __repr__(self) -> str:
         """Prints a human-readable board representation, showing move indices on empty cells which are legal moves."""
         output: str = ""
-        legal_moves = self.get_legal_moves()
+        legal_move_indices = [int(move) for move in self.get_legal_moves()]
         for row_index in range(self.size):
             row = self.board[row_index * self.size : (row_index + 1) * self.size]
             row_strs = []
@@ -40,7 +41,7 @@ class GameOthello(GameBase):
                 else:
                     square_index = row_index * self.size + col_index
                     square_str = str(square_index).rjust(2)
-                    if square_index in legal_moves:
+                    if square_index in legal_move_indices:
                         row_strs.append(colorama.Fore.YELLOW + square_str + colorama.Style.RESET_ALL)
                     else:
                         row_strs.append("  ")
@@ -50,12 +51,12 @@ class GameOthello(GameBase):
                 output += "---" + "+----" * (self.size - 1) + "\n"
         return output
 
-    def get_legal_moves(self) -> List[int]:
+    def get_legal_moves(self) -> List[Move]:
         """Returns a list of indices where moves can be made."""
         directions = [(-1, -1), (-1, 0), (-1, 1),
                       (0, -1),          (0, 1),
                       (1, -1), (1, 0), (1, 1)]
-        legal_moves = set()
+        legal_move_indices = set()
         
         for idx, cell in enumerate(self.board):
             if cell != 0:
@@ -70,13 +71,13 @@ class GameOthello(GameBase):
                         found_opponent = True
                     elif self.board[neighbor_idx] == self.current_player:
                         if found_opponent:
-                            legal_moves.add(idx)
+                            legal_move_indices.add(idx)
                         break
                     else:
                         break
                     r += dr
                     c += dc
-        return list(legal_moves)
+        return [Move(move_index) for move_index in legal_move_indices]
     
     def copy(self) -> "GameOthello":
         """Returns a deep copy of the game."""

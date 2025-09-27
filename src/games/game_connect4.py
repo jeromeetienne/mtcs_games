@@ -6,7 +6,7 @@ import colorama
 
 # local imports
 from src.bases.game_base import GameBase
-
+from src.bases.move import Move
 
 class GameConnect4(GameBase):
     """
@@ -42,12 +42,12 @@ class GameConnect4(GameBase):
                 output += "--" + "+---" * (self.cols - 1) + "\n"
         return output
 
-    def get_legal_moves(self) -> List[int]:
+    def get_legal_moves(self) -> List[Move]:
         """Returns a list of column indices (0 to cols-1) where moves can be made."""
-        legal_moves = []
+        legal_moves: list[Move] = []
         for col in range(self.cols):
             if self.board[col] == 0:  # If the top cell of the column is empty
-                legal_moves.append(col)
+                legal_moves.append(Move(col))
         return legal_moves
     
 
