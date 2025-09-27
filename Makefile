@@ -6,6 +6,8 @@ help: ## show this help
 lint_checker: ## Run lint checker on source files
 	pyright bin/**/*.py src/**/*.py
 
+test: lint_checker test_all_games ## Run all tests
+
 ######################################################
 
 play_tictactoe:	## Play Tic Tac Toe
@@ -28,4 +30,4 @@ test_connect4: ## Run AI vs AI simulations for Connect 4
 test_othello: ## Run AI vs AI simulations for Othello
 	python3 bin/play_game.py --game othello -f ai -s ai -gpm 5 -sim 5 --seed 123
 
-test_all: test_tictactoe test_connect4 test_othello ## Run AI vs AI simulations for all games
+test_all_games: test_tictactoe test_connect4 test_othello ## Run AI vs AI simulations for all games

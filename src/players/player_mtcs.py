@@ -6,8 +6,8 @@ from typing import Dict, List, Optional, Tuple
 
 # local imports
 from src.bases.move import Move
-from src.bases.player_base import PlayerBase
-from src.bases.game_base import GameBase
+from src.bases.base_player import BasePlayer
+from src.bases.base_game import BaseGame
 
 ###############################################################################
 #   MCTS Tree Node
@@ -16,8 +16,8 @@ class MCTSNode:
     """
     Represents a single node in the Monte Carlo Tree Search tree.
     """
-    def __init__(self, game_state: GameBase, parent: Optional['MCTSNode'] = None, parent_move: Optional[int] = None):
-        self.game_state: GameBase = game_state
+    def __init__(self, game_state: BaseGame, parent: Optional['MCTSNode'] = None, parent_move: Optional[int] = None):
+        self.game_state: BaseGame = game_state
         self.parent: Optional['MCTSNode'] = parent
         self.parent_move: Optional[int] = parent_move # The move that led to this state
         self.children: Dict[int, 'MCTSNode'] = {}    # Maps move (int) to child node
@@ -70,7 +70,7 @@ class MCTSNode:
 ###############################################################################
 #   MCTS Player Implementation
 #
-class PlayerMCTS(PlayerBase):
+class PlayerMCTS(BasePlayer):
     """
     An AI player that uses Monte Carlo Tree Search to determine the best move.
     """
@@ -84,7 +84,7 @@ class PlayerMCTS(PlayerBase):
             self.rnd_generator.seed(seed)
 
 
-    def get_move(self, game: GameBase) -> Move:
+    def get_move(self, game: BaseGame) -> Move:
         """
         Runs the MCTS algorithm for a fixed number of simulations and returns the
         best move based on the most visited child node.
@@ -130,7 +130,7 @@ class PlayerMCTS(PlayerBase):
         
         return new_node
 
-    def _simulate(self, game: GameBase) -> int:
+    def _simulate(self, game: BaseGame) -> int:
         """
         The Simulation (or Playout) phase: Play a random game until a terminal state.
         Returns the winner (1, -1, or 0 for draw).
@@ -145,7 +145,7 @@ class PlayerMCTS(PlayerBase):
 
         # winner  = typing.cast(int, current_game.check_win())
 
-        return typing.cast(int, current_game.check_win())   
+        return typing.cast(int, current_game.get_winner())   
 
     def _backpropagate(self, node: MCTSNode, result: int) -> None:
         """The Backpropagation phase: Update visits and wins up to the root."""

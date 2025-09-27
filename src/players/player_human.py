@@ -7,13 +7,13 @@ from simple_term_menu import TerminalMenu
 
 # local imports
 from src.bases.move import Move
-from src.bases.player_base import PlayerBase
-from src.bases.game_base import GameBase
+from src.bases.base_player import BasePlayer
+from src.bases.base_game import BaseGame
 
 ###############################################################################
 #   Human Player
 #
-class PlayerHuman(PlayerBase):
+class PlayerHuman(BasePlayer):
     """
     Represents a player whose moves are decided by human input.
     """
@@ -21,7 +21,7 @@ class PlayerHuman(PlayerBase):
         self.player_id: int = player_id
         self.marker: str = 'X' if player_id == 1 else 'O'
 
-    def get_move(self, game: GameBase) -> Move:
+    def get_move(self, game: BaseGame) -> Move:
         """
         Prompts the human for a move and validates the input.
         """

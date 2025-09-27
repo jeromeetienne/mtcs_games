@@ -15,14 +15,14 @@ from src.games.game_othello import GameOthello
 from src.players.player_human import PlayerHuman
 from src.players.player_mtcs import PlayerMCTS
 from src.players.player_random import PlayerRandom
-from src.bases.player_base import PlayerBase
-from src.bases.game_base import GameBase
+from src.bases.base_player import BasePlayer
+from src.bases.base_game import BaseGame
 
 
 ###############################################################################
 #   Game Loop
 #
-def play_game(game: GameBase, player1: PlayerBase, player2: PlayerBase) -> int:
+def play_game(game: BaseGame, player1: BasePlayer, player2: BasePlayer) -> int:
     """
     Plays a game of Tic-Tac-Toe between a HumanPlayer and a RandomPlayer.
 
@@ -32,7 +32,7 @@ def play_game(game: GameBase, player1: PlayerBase, player2: PlayerBase) -> int:
         player2 (PlayerBase): The player for 'O' (player_id=-1).
     """
 
-    players: dict[int, PlayerBase] = {1: player1, -1: player2}
+    players: dict[int, BasePlayer] = {1: player1, -1: player2}
 
     # Display the initial board with move indices
     print("🤖 Welcome to Tic-Tac-Toe! The board indices are as follows:")
@@ -60,7 +60,7 @@ def play_game(game: GameBase, player1: PlayerBase, player2: PlayerBase) -> int:
     # Game Over
     print("\n--- Game Over ---")
     print(game)
-    result = game.check_win()
+    result = game.get_winner()
 
     if result == 1:
         print(f"🎉 **Player X ({players[1].marker}) Wins!** 🎉")

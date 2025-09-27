@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 # local imports
 from .move import Move
 
-class GameBase(ABC):
+class BaseGame(ABC):
     board: List[int]
     """The game board as a list of integers"""
     current_player: int
@@ -17,20 +17,20 @@ class GameBase(ABC):
         pass
 
     @abstractmethod
-    def copy(self) -> "GameBase":
+    def copy(self) -> "BaseGame":
         """Returns a deep copy of the game."""
         pass
 
     @abstractmethod
-    def make_move(self, move: Move) -> "GameBase":
+    def make_move(self, move: Move) -> "BaseGame":
         """Returns a new GameBase object after making the move."""
         pass
 
     @abstractmethod
-    def check_win(self) -> Optional[int]:
+    def get_winner(self) -> Optional[int]:
         """Returns 1 if player 1 wins, -1 if player -1 wins, 0 if draw, None if ongoing."""
         pass
 
     def is_game_over(self) -> bool:
         """Returns True if the game is over (win or draw), else False."""
-        return self.check_win() is not None
+        return self.get_winner() is not None

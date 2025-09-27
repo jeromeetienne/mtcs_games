@@ -6,13 +6,13 @@ from typing import List, Optional
 import colorama
 
 # local imports
-from src.bases.game_base import GameBase
+from src.bases.base_game import BaseGame
 from src.bases.move import Move
 
 ###############################################################################
 #   Represents the state and rules of a Tic-Tac-Toe game.
 #
-class GameTicTacToe(GameBase):
+class GameTicTacToe(BaseGame):
     """
     Represents the state and rules of a Tic-Tac-Toe game. 
     """
@@ -72,7 +72,7 @@ class GameTicTacToe(GameBase):
         new_game.current_player = -self.current_player  
         return new_game
 
-    def check_win(self) -> Optional[int]:
+    def get_winner(self) -> Optional[int]:
         """
         Checks for a win. Returns 1 if 'X' wins, -1 if 'O' wins, 0 if no winner,
         and None if the game is still ongoing.
@@ -119,7 +119,7 @@ if __name__ == "__main__":
         print(f"Player {'X' if game.current_player == -1 else 'O'} made move at index {move}")
         print(game)
     
-    result = game.check_win()
+    result = game.get_winner()
     if result == 1:
         print("Player X wins!")
     elif result == -1:

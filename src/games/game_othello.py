@@ -6,13 +6,13 @@ import colorama
 
 # local imports
 from src.bases.move import Move
-from src.bases.game_base import GameBase
+from src.bases.base_game import BaseGame
 
 
 ###############################################################################
 #   Represents the state and rules of an Othello game.
 #
-class GameOthello(GameBase):
+class GameOthello(BaseGame):
     """
     Represents the state and rules of an Othello game.
     """
@@ -126,7 +126,7 @@ class GameOthello(GameBase):
         new_game.current_player = -self.current_player  # Switch player
         return new_game
     
-    def check_win(self) -> Optional[int]:
+    def get_winner(self) -> Optional[int]:
         """
         Checks for a win. Returns 1 if 'X' wins, -1 if 'O' wins, 0 if no winner (draw),
         and None if the game is still ongoing.
@@ -165,7 +165,7 @@ if __name__ == "__main__":
         print("Legal Moves:", game.get_legal_moves())
     
     print("Game Over!")
-    result = game.check_win()
+    result = game.get_winner()
     if result == 1:
         print("Player X wins!")
     elif result == -1:

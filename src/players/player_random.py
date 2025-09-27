@@ -3,10 +3,10 @@ import random
 
 # local imports
 from src.bases.move import Move
-from src.bases.player_base import PlayerBase
-from src.bases.game_base import GameBase
+from src.bases.base_player import BasePlayer
+from src.bases.base_game import BaseGame
 
-class PlayerRandom(PlayerBase):
+class PlayerRandom(BasePlayer):
     """
     Represents an AI player that chooses a move randomly from legal options.
     """
@@ -14,7 +14,7 @@ class PlayerRandom(PlayerBase):
         self.player_id: int = player_id
         self.marker: str = 'X' if player_id == 1 else 'O'
 
-    def get_move(self, game: GameBase) -> Move:
+    def get_move(self, game: BaseGame) -> Move:
         """
         Picks a random move from the list of legal moves.
         """

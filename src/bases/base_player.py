@@ -4,10 +4,10 @@ from typing import Any
 
 # local imports
 from .move import Move
-from . game_base import GameBase
+from .base_game import BaseGame
 
 
-class PlayerBase(ABC):
+class BasePlayer(ABC):
     """
     Abstract base class for any TicTacToe player (Human or AI).
 
@@ -24,12 +24,12 @@ class PlayerBase(ABC):
         self.marker = 'X' if player_id == 1 else 'O'
 
     @abstractmethod
-    def get_move(self, game: GameBase) -> Move:
+    def get_move(self, game: BaseGame) -> Move:
         """Calculate and return the player's chosen move (index 0-8)."""
         raise NotImplementedError
 
     @abstractmethod
-    def copy(self) -> 'PlayerBase':
+    def copy(self) -> 'BasePlayer':
         """Create and return a copy of this player instance."""
         raise NotImplementedError
 
