@@ -13,7 +13,7 @@ from src.bases.game_base import GameBase
 # --- TicTacToe Class (Unchanged) ---
 class GameTicTacToe(GameBase):
     """
-    Represents the state and rules of a Tic-Tac-Toe game.
+    Represents the state and rules of a Tic-Tac-Toe game. 
     """
     def __init__(self, size: int = 3) -> None:
         self.size: int = size
