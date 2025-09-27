@@ -58,12 +58,13 @@ class GameConnect4(GameBase):
         new_game.current_player = self.current_player
         return new_game
 
-    def make_move(self, move: int) -> "GameConnect4":
+    def make_move(self, move: Move) -> "GameConnect4":
         """
         Creates and returns a new Connect4 object after making the move.
         Assumes the move is valid (i.e., the column is not full).
         """
-        if move < 0 or move >= self.cols or self.board[move] != 0:
+        move_idx = int(move)
+        if move_idx < 0 or move_idx >= self.cols or self.board[move_idx] != 0:
             raise ValueError("Invalid move attempted on a full or out-of-bounds column.")
 
         # Create a new game state
@@ -71,7 +72,7 @@ class GameConnect4(GameBase):
         
         # Play the move in the lowest available row in the specified column
         for row in range(self.rows - 1, -1, -1):
-            square_idx = row * self.cols + move
+            square_idx = row * self.cols + move_idx
             if new_game.board[square_idx] == 0:
                 new_game.board[square_idx] = self.current_player
                 break
@@ -117,18 +118,18 @@ class GameConnect4(GameBase):
 if __name__ == "__main__":
     game = GameConnect4()
     print(game)
-    game = game.make_move(3)
+    game = game.make_move(Move(3))
     print(game)
-    game = game.make_move(3)
+    game = game.make_move(Move(3))
     print(game)
-    game = game.make_move(2)
+    game = game.make_move(Move(2))
     print(game)
-    game = game.make_move(2)
+    game = game.make_move(Move(2))
     print(game)
-    game = game.make_move(1)
+    game = game.make_move(Move(1))
     print(game)
-    game = game.make_move(1)
+    game = game.make_move(Move(1))
     print(game)
-    game = game.make_move(0)
+    game = game.make_move(Move(0))
     print(game)
     print("Winner:", game.check_win())

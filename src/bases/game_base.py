@@ -22,7 +22,7 @@ class GameBase(ABC):
         pass
 
     @abstractmethod
-    def make_move(self, move: int) -> "GameBase":
+    def make_move(self, move: Move) -> "GameBase":
         """Returns a new GameBase object after making the move."""
         pass
 

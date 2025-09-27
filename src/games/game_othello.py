@@ -85,13 +85,14 @@ class GameOthello(GameBase):
         new_game.board = list(self.board)
         new_game.current_player = self.current_player
         return new_game
-    
-    def make_move(self, move: int) -> "GameOthello":
+
+    def make_move(self, move: Move) -> "GameOthello":
         """
         Creates and returns a new GameOthello object after making the move.
         Assumes the move is valid.
         """
-        if self.board[move] != 0:
+        move_idx = int(move)
+        if self.board[move_idx] != 0:
             raise ValueError("Invalid move attempted on a non-empty cell.")
         
         directions = [(-1, -1), (-1, 0), (-1, 1),
@@ -99,9 +100,9 @@ class GameOthello(GameBase):
                       (1, -1), (1, 0), (1, 1)]
         
         new_game = self.copy()
-        new_game.board[move] = self.current_player
+        new_game.board[move_idx] = self.current_player
         
-        row, col = divmod(move, self.size)
+        row, col = divmod(move_idx, self.size)
         for dr, dc in directions:
             r, c = row + dr, col + dc
             to_flip = []

@@ -8,6 +8,7 @@ and an AI player (Random or MCTS).
 import argparse
 
 # local imports
+from src.bases.move import Move
 from src.games.game_tictactoe import GameTicTacToe
 from src.games.game_connect4 import GameConnect4
 from src.games.game_othello import GameOthello
@@ -48,13 +49,13 @@ def play_game(game: GameBase, player1: PlayerBase, player2: PlayerBase) -> int:
         print(f"\n✨ Current Board:\n{game}")
 
         # Get the move from the current player object
-        move = current_player.get_move(game)
+        move_idx = current_player.get_move(game)
 
         # Log the move
-        print(f"Player {current_player.marker} ({type(current_player).__name__}) picked move: {move}")
+        print(f"Player {current_player.marker} ({type(current_player).__name__}) picked move: {move_idx}")
 
         # Make the move and update the game state
-        game = game.make_move(move)
+        game = game.make_move(Move(move_idx))
 
     # Game Over
     print("\n--- Game Over ---")

@@ -55,18 +55,19 @@ class GameTicTacToe(GameBase):
         new_game.current_player = self.current_player
         return new_game
 
-    def make_move(self, move: int) -> "GameTicTacToe":
+    def make_move(self, move: Move) -> "GameTicTacToe":
         """
         Creates and returns a new TicTacToe object after making the move.
         Assumes the move is valid.
         """
-        if self.board[move] != 0:
+        move_idx = int(move)
+        if self.board[move_idx] != 0:
             raise ValueError("Invalid move attempted on a non-empty cell.")
             
         # Create a new game state
         new_game = self.copy()
         # Play the move
-        new_game.board[move] = self.current_player
+        new_game.board[move_idx] = self.current_player
         # Switch player
         new_game.current_player = -self.current_player  
         return new_game
@@ -118,7 +119,7 @@ if __name__ == "__main__":
     while not game.is_game_over():
         legal_moves = game.get_legal_moves()
         move = random.choice(legal_moves)
-        game = game.make_move(int(move))
+        game = game.make_move(move)
         print(f"Player {'X' if game.current_player == -1 else 'O'} made move at index {move}")
         print(game)
     

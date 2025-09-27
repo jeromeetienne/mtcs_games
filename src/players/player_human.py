@@ -39,13 +39,13 @@ class PlayerHuman(PlayerBase):
                 assert menu_entry_index is not None, "No move selected."
                 menu_entry_index = typing.cast(int, menu_entry_index)
                 # Get the move from the selected menu option
-                move_index: int = int(menu_options[menu_entry_index])
+                move_idx: int = int(menu_options[menu_entry_index])
 
                 # Check for EOF/Ctrl+D and exit gracefully
-                if move_index is None:
+                if move_idx is None:
                     raise EOFError()
                 
-                move = Move(move_index)
+                move = Move(move_idx)
                 legal_moves = game.get_legal_moves()
                 
                 if move in legal_moves:
