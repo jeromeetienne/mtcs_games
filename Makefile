@@ -20,12 +20,12 @@ play_othello:	## Play Othello
 #######################################################
 
 test_tictactoe: ## Run AI vs AI simulations for Tic Tac Toe
-	python3 bin/play_game.py --game tictactoe -f ai -s ai -gpm 5 -sim 5
+	python3 bin/play_game.py --game tictactoe -f ai -s ai -gpm 5 -sim 5 --seed 123
 
 test_connect4: ## Run AI vs AI simulations for Connect 4
-	python3 bin/play_game.py --game connect4 -f ai -s ai -gpm 5 -sim 5
+	python3 bin/play_game.py --game connect4 -f ai -s ai -gpm 5 -sim 5 --seed 123
 
 test_othello: ## Run AI vs AI simulations for Othello
-	python3 bin/play_game.py --game othello -f ai -s ai -gpm 5 -sim 5
+	python3 bin/play_game.py --game othello -f ai -s ai -gpm 5 -sim 5 --seed 123
 
 test_all: test_tictactoe test_connect4 test_othello ## Run AI vs AI simulations for all games
