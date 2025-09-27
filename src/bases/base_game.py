@@ -4,11 +4,12 @@ from abc import ABC, abstractmethod
 
 # local imports
 from .move import Move
+from .types import PlayerID, GameResult
 
 class BaseGame(ABC):
     board: List[int]
     """The game board as a list of integers"""
-    current_player: int
+    current_player: PlayerID
     """the player to move: 1 or -1"""
 
     @abstractmethod
@@ -27,7 +28,7 @@ class BaseGame(ABC):
         pass
 
     @abstractmethod
-    def get_winner(self) -> Optional[int]:
+    def get_winner(self) -> GameResult | None:
         """Returns 1 if player 1 wins, -1 if player -1 wins, 0 if draw, None if ongoing."""
         pass
 

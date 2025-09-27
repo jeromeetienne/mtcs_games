@@ -8,6 +8,7 @@ import colorama
 # local imports
 from src.bases.base_game import BaseGame
 from src.bases.move import Move
+from src.bases.types import GameResult, PlayerID
 
 ###############################################################################
 #   Represents the state and rules of a Tic-Tac-Toe game.
@@ -22,7 +23,7 @@ class GameTicTacToe(BaseGame):
         # where 0=Empty, 1='X' (Player 1), -1='O' (Player -1)
         self.board: List[int] = [0] * (size * size)
         # 1: 'X', -1: 'O'
-        self.current_player: int = 1
+        self.current_player: PlayerID = PlayerID(1)
 
     def __repr__(self) -> str:
         """Prints a human-readable board representation, showing move indices on empty cells."""
@@ -69,10 +70,10 @@ class GameTicTacToe(BaseGame):
         # Play the move
         new_game.board[move_idx] = self.current_player
         # Switch player
-        new_game.current_player = -self.current_player  
+        new_game.current_player = PlayerID(-self.current_player)
         return new_game
 
-    def get_winner(self) -> Optional[int]:
+    def get_winner(self) -> GameResult | None:
         """
         Checks for a win. Returns 1 if 'X' wins, -1 if 'O' wins, 0 if no winner,
         and None if the game is still ongoing.
@@ -95,13 +96,13 @@ class GameTicTacToe(BaseGame):
         
         for line in lines:
             if sum(line) == self.size:
-                return 1  # 'X' wins
+                return GameResult(1)  # 'X' wins
             if sum(line) == -self.size:
-                return -1 # 'O' wins
+                return GameResult(-1)  # 'O' wins
 
         # Check for draw (if no moves left)
         if not self.get_legal_moves():
-            return 0  # Draw
+            return GameResult(0)  # Draw
 
         return None # Game is still ongoing
 

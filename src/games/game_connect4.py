@@ -7,6 +7,7 @@ import colorama
 # local imports
 from src.bases.base_game import BaseGame
 from src.bases.move import Move
+from src.bases.types import GameResult, PlayerID, player_id_to_marker
 
 ###############################################################################
 #   Represents the state and rules of a Connect 4 game.
@@ -22,7 +23,7 @@ class GameConnect4(BaseGame):
         # where 0=Empty, 1='X' (Player 1), -1='O' (Player -1)
         self.board: List[int] = [0] * (rows * cols)
         # 1: 'X', -1: 'O'
-        self.current_player: int = 1
+        self.current_player = PlayerID(1)
 
     def __repr__(self) -> str:
         """Prints a human-readable board representation, showing move indices on empty cells."""
@@ -81,10 +82,10 @@ class GameConnect4(BaseGame):
                 break
 
         # Switch player
-        new_game.current_player = -self.current_player  
+        new_game.current_player = PlayerID(-self.current_player)
         return new_game
     
-    def get_winner(self) -> Optional[int]:
+    def get_winner(self) -> GameResult | None:
         """
         Checks for a win. Returns 1 if 'X' wins, -1 if 'O' wins, 0 if no winner,
         and None if the game is still ongoing.
@@ -102,12 +103,12 @@ class GameConnect4(BaseGame):
                     while 0 <= r < self.rows and 0 <= c < self.cols and self.board[r * self.cols + c] == player:
                         count += 1
                         if count == 4:
-                            return player
+                            return GameResult(player)
                         r += dr
                         c += dc
         
         if all(cell != 0 for cell in self.board):
-            return 0  # Draw
+            return GameResult(0)  # Draw
         
         return None  # Game is still ongoing
 

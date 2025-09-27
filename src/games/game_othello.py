@@ -5,6 +5,7 @@ from typing import List, Optional
 import colorama
 
 # local imports
+from src.bases.types import GameResult, PlayerID, player_id_to_marker
 from src.bases.move import Move
 from src.bases.base_game import BaseGame
 
@@ -28,7 +29,7 @@ class GameOthello(BaseGame):
         self.board[mid * size + (mid - 1)] = 1
         self.board[mid * size + mid] = -1
         # 1: 'X', -1: 'O'
-        self.current_player: int = 1
+        self.current_player = PlayerID(1)
 
     def __repr__(self) -> str:
         """Prints a human-readable board representation, showing move indices on empty cells which are legal moves."""
@@ -122,11 +123,11 @@ class GameOthello(BaseGame):
                     break
                 r += dr
                 c += dc
-        
-        new_game.current_player = -self.current_player  # Switch player
+
+        new_game.current_player = PlayerID(-self.current_player)  # Switch player
         return new_game
     
-    def get_winner(self) -> Optional[int]:
+    def get_winner(self) -> GameResult | None:
         """
         Checks for a win. Returns 1 if 'X' wins, -1 if 'O' wins, 0 if no winner (draw),
         and None if the game is still ongoing.
@@ -138,11 +139,11 @@ class GameOthello(BaseGame):
         count_o = sum(1 for cell in self.board if cell == -1)
         
         if count_x > count_o:
-            return 1  # 'X' wins
+            return GameResult(1)  # 'X' wins
         elif count_o > count_x:
-            return -1 # 'O' wins
+            return GameResult(-1)  # 'O' wins
         else:
-            return 0  # Draw
+            return GameResult(0)  # Draw
 
 ###############################################################################
 #   --- Example Usage (Unchanged) ---
@@ -157,18 +158,18 @@ if __name__ == "__main__":
         move = legal_moves[0] if legal_moves else -1
         if move == -1:
             print("No legal moves available. Passing turn.")
-            game.current_player = -game.current_player
+            game.current_player = PlayerID(-game.current_player)
             continue
-        print(f"Player {'X' if game.current_player == 1 else 'O'} plays move at index {move}")
+        print(f"Player {player_id_to_marker(game.current_player)} plays move at index {move}")
         game = game.make_move(move)
         print(game)
         print("Legal Moves:", game.get_legal_moves())
     
     print("Game Over!")
-    result = game.get_winner()
-    if result == 1:
+    game_result = game.get_winner()
+    if game_result == 1:
         print("Player X wins!")
-    elif result == -1:
+    elif game_result == -1:
         print("Player O wins!")
     else:
         print("It's a draw!")

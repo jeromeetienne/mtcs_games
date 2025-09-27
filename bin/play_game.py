@@ -61,18 +61,18 @@ def play_game(game: BaseGame, player1: BasePlayer, player2: BasePlayer) -> int:
     # Game Over
     print("\n--- Game Over ---")
     print(game)
-    result = game.get_winner()
+    GameResult = game.get_winner()
 
-    if result == 1:
+    if GameResult == 1:
         print(f"🎉 **Player X ({players[1].marker}) Wins!** 🎉")
-    elif result == -1:
+    elif GameResult == -1:
         print(f"💔 **Player O ({players[-1].marker}) Wins!** 💔")
-    elif result == 0:
+    elif GameResult == 0:
         print("🤝 **It's a Draw!** 🤝")
     else:
         assert False, "Unexpected game result."
 
-    return result
+    return GameResult
 
 
 ###############################################################################
