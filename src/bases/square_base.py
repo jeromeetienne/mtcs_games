@@ -14,3 +14,10 @@ class SquareBase(ABC):
 		"""Return the integer index of the square."""
 		return self._index
 
+class Square(SquareBase):
+	"""
+	Concrete implementation of SquareBase representing a square on the board.
+	"""
+
+	def __init__(self, index: int):
+		super().__init__(index)
