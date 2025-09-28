@@ -1,4 +1,7 @@
 # TODO
+- is it possible to paralellize MTCS ?
+- could i play poker texas holdem with this framework ?
+  - this is able to make money with mcts
 - do gif of games played
 - make the move an actual `Move` type, and a `Square` type for chess
   - currently it's just an int
