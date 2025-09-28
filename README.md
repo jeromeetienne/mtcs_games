@@ -8,10 +8,23 @@ Each game is implemented with a common interface defined in the `protocols` modu
 
 The UI is console-based, providing a simple way to interact with the games. Players can choose to play as 'X' or 'O' and can select which game to play via command-line arguments.
 
-MTCS doesn't need to know the rules of the game, it just needs to be able to simulate games and get the result. 
+MCTS doesn't need to know the rules of the game, it just needs to be able to simulate games and get the result. 
 No heuristics are used, just pure random simulations.
-MTCS is implemented in the `players` module, with a dedicated class for the MCTS player.
+MCTS is implemented in the `players` module, with a dedicated class for the MCTS player.
 
+## MCTS Algorithm
+Here is a short summary of the MCTS algorithm:
+- [paper](https://arxiv.org/abs/2103.04931)
+- [wikipedia](https://en.wikipedia.org/wiki/Monte_Carlo_tree_search)
+- [detailed video explanation](https://www.youtube.com/watch?v=Fbs4lnGLS8M)
+
+
+## Remarks
+- no models (nothing to train)
+- if you code the rules of the game, you can play it with MCTS.
+   - just need to be able to play the game, and simulate it (playing randomly)
+- Crazy good when considering it is just play randomly
+- No heuristics, no knowledge of the game, just pure random simulations
 ## Games
 
 Screenshots of each game. Ascii Art for the win ! 🎮
@@ -35,7 +48,7 @@ An implementation of the Othello game, also known as Reversi, played on an 8x8 b
 Create a virtual environment and install the required packages:
 
 ```bash
-python -m venv .venv
+python3.10 -m venv .venv
 source .venv/bin/activate  # On Windows use `venv\Scripts\activate`
 ```
 
