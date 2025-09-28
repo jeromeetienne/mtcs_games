@@ -14,6 +14,9 @@ MTCS is implemented in the `players` module, with a dedicated class for the MCTS
 
 ## Games
 
+Screenshots of each game. Ascii Art for the win ! 🎮
+
+
 ### Tic-Tac-Toe
 A simple implementation of the classic Tic-Tac-Toe game.
 
