@@ -12,6 +12,21 @@ MTCS doesn't need to know the rules of the game, it just needs to be able to sim
 No heuristics are used, just pure random simulations.
 MTCS is implemented in the `players` module, with a dedicated class for the MCTS player.
 
+## Games
+
+### Tic-Tac-Toe
+A simple implementation of the classic Tic-Tac-Toe game.
+
+![Tic-Tac-Toe Example](https://raw.githubusercontent.com/user-attachments/assets/32e8b47d-a4a5-4828-8041-00aa3ad284a4)
+### Connect4
+A Connect4 game where players take turns dropping discs into a 7-column, 6-row vertically suspended grid.
+
+![Connect4 Example](https://github.com/user-attachments/assets/39b73d2e-d7d3-49ab-aedd-c41455707169)
+### Othello
+An implementation of the Othello game, also known as Reversi, played on an 8x8 board.
+
+![Othello Example](https://github.com/user-attachments/assets/5302edb5-4a1a-43e3-a0df-6a2ca2d4484a)
+
 ## How to install
 
 Create a virtual environment and install the required packages:
