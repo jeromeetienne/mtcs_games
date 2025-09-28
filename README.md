@@ -17,7 +17,7 @@ MTCS is implemented in the `players` module, with a dedicated class for the MCTS
 ### Tic-Tac-Toe
 A simple implementation of the classic Tic-Tac-Toe game.
 
-![Tic-Tac-Toe Example](https://raw.githubusercontent.com/user-attachments/assets/32e8b47d-a4a5-4828-8041-00aa3ad284a4)
+![Tic-Tac-Toe Example](https://github.com/user-attachments/assets/32e8b47d-a4a5-4828-8041-00aa3ad284a4)
 ### Connect4
 A Connect4 game where players take turns dropping discs into a 7-column, 6-row vertically suspended grid.
 
